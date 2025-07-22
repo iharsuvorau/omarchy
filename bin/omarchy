@@ -62,8 +62,9 @@ update_menu() {
 
 theme_menu() {
   show_ascii_art
-  local menu=("Install" "Remove" "Back")
+  local menu=("Pick" "Install" "Remove" "Back")
   local commands=(
+    "omarchy-theme-menu"
     "install_theme_prompt"
     "remove_theme_prompt"
     "main_menu"
@@ -104,9 +105,12 @@ remove_theme_prompt() {
 
 setup_menu() {
   show_ascii_art
-  local menu=("Fingerprint sensor" "Back")
+  local menu=("Add fingerprint sensor" "Remove fingerprint sensor" "Add Fido2 device" "Remove Fido2 device" "Back")
   local commands=(
-    "omarchy-fingerprint-setup"
+    "omarchy-setup-fingerprint"
+    "omarchy-setup-fingerprint --remove"
+    "omarchy-setup-fido2"
+    "omarchy-setup-fido2 --remove"
     "main_menu"
   )
   local choice
@@ -126,7 +130,8 @@ setup_menu() {
 }
 
 open_manual() {
-  xdg-open "https://manuals.omamix.org/2/the-omarchy-manual"
+  setsid chromium --new-window --ozone-platform=wayland --app="https://manuals.omamix.org/2/the-omarchy-manual" >/dev/null 2>&1 &
+  clear
 }
 
 ack_command() {
@@ -134,4 +139,3 @@ ack_command() {
 }
 
 main_menu
-
